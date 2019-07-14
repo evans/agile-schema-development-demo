@@ -22,15 +22,12 @@ jobs:
 
     steps:
       - checkout
-      - run: cd server && npm ci
-      - run: cd server && npm test
+      - run: cd server && npm run build
 
       - run:
-          name: Starting server
-          command: cd server && npm run start:ci
-          background: true
+          name: Output schema locally
+          command: cd server && node scripts/publish.js
 
-      - run: sleep 5
       - run: cd server && npx apollo service:check
 
       - run: |
