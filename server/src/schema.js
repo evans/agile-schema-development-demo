@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server');
+const { gql } = require("apollo-server");
 
 const typeDefs = gql`
   type Query {
@@ -18,7 +18,7 @@ const typeDefs = gql`
 
   type Mutation {
     # if false, signup failed -- check errors
-    bookTrips(launchIds: [ID]!): TripUpdateResponse!
+    bookTrips(launchIds: [ID]!): Boolean!
 
     # if false, cancellation failed -- check errors
     cancelTrip(launchId: ID!): TripUpdateResponse!

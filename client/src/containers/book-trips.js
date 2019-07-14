@@ -1,21 +1,14 @@
-import React from 'react';
-import { Mutation } from 'react-apollo';
-import gql from 'graphql-tag';
+import React from "react";
+import { Mutation } from "react-apollo";
+import gql from "graphql-tag";
 
-import Button from '../components/button';
-import { GET_LAUNCH } from './cart-item';
+import Button from "../components/button";
+import { GET_LAUNCH } from "./cart-item";
 
 export { GET_LAUNCH };
 export const BOOK_TRIPS = gql`
   mutation BookTrips($launchIds: [ID]!) {
-    bookTrips(launchIds: $launchIds) {
-      success
-      message
-      launches {
-        id
-        isBooked
-      }
-    }
+    bookTrips(launchIds: $launchIds)
   }
 `;
 
@@ -26,15 +19,15 @@ export default function BookTrips({ cartItems }) {
       variables={{ launchIds: cartItems }}
       refetchQueries={cartItems.map(launchId => ({
         query: GET_LAUNCH,
-        variables: { launchId },
+        variables: { launchId }
       }))}
       update={cache => {
         cache.writeData({ data: { cartItems: [] } });
       }}
     >
-      {(bookTrips, { data, loading, error }) =>
-        data && data.bookTrips && !data.bookTrips.success ? (
-          <p data-testid="message">{data.bookTrips.message}</p>
+      {(bookTrips, { data }) =>
+        data && data.bookTrips ? (
+          <p data-testid="message">Failed to book</p>
         ) : (
           <Button onClick={bookTrips} data-testid="book-button">
             Book All

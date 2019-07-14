@@ -23,16 +23,7 @@ module.exports = {
     bookTrips: async (_, { launchIds }, { dataSources }) => {
       const results = await dataSources.userAPI.bookTrips({ launchIds });
 
-      return {
-        success: results && results.length === launchIds.length,
-        message:
-          results.length === launchIds.length
-            ? "trips booked successfully"
-            : `the following launches couldn't be booked: ${launchIds.filter(
-                id => !results.includes(id)
-              )}`,
-        launchIds
-      };
+      return results.length;
     },
     cancelTrip: async (_, { launchId }, { dataSources }) => {
       const result = dataSources.userAPI.cancelTrip({ launchId });
