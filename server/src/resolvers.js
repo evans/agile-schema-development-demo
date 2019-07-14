@@ -2,7 +2,7 @@ const { paginateResults } = require("./utils");
 
 module.exports = {
   Query: {
-    launches: async (_, { pageSize = 20, after = 0 }, { dataSources }) => {
+    launches: async (_, { pageSize = 20, after = 40 }, { dataSources }) => {
       const launches = await dataSources.launchAPI.getAllLaunches({
         limit: pageSize,
         offset: after,
@@ -59,7 +59,11 @@ module.exports = {
   },
   Launch: {
     isBooked: async (launch, _, { dataSources }) =>
-      dataSources.userAPI.isBookedOnLaunch({ launchId: launch.id })
+      dataSources.userAPI.isBookedOnLaunch({ launchId: launch.id }),
+    rocket: (launch, _, { dataSources }) =>
+      dataSources.rocketAPI.getRocketById({
+        rocketId: launch.rocket.id
+      })
   },
   Mission: {
     // make sure the default size is 'large' in case user doesn't specify

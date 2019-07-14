@@ -30,7 +30,9 @@ class LaunchAPI extends RESTDataSource {
 
     // transform the raw launches to a more friendly
     return Array.isArray(response)
-      ? response.map(launch => this.launchReducer(launch))
+      ? response.map(launch => {
+          return this.launchReducer(launch);
+        })
       : [];
   }
 

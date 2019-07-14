@@ -9,6 +9,7 @@ const { createStore } = require("./utils");
 
 const LaunchAPI = require("./datasources/launch");
 const UserAPI = require("./datasources/user");
+const RocketAPI = require("./datasources/rocket");
 
 const internalEngineDemo = require("./engine-demo");
 
@@ -18,7 +19,8 @@ const store = createStore();
 // set up any dataSources our resolvers need
 const dataSources = () => ({
   launchAPI: new LaunchAPI(),
-  userAPI: new UserAPI({ store })
+  userAPI: new UserAPI({ store }),
+  rocketAPI: new RocketAPI()
 });
 
 // the function that sets up the global context for each resolver, using the req
