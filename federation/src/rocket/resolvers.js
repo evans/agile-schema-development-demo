@@ -1,6 +1,6 @@
 module.exports = {
   Rocket: {
-    __resolveReference: ({ id }, _, { dataSources }) =>
+    __resolveReference: ({ id }, { dataSources }) =>
       dataSources.rocketAPI.getRocketById({
         rocketId: id
       })

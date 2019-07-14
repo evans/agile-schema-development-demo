@@ -38,5 +38,9 @@ module.exports = {
       const launchIds = await dataSources.userAPI.getLaunchIdsByUser();
       return launchIds.map(id => ({ __typename: "Launch", id }));
     }
+  },
+  Launch: {
+    isBooked: async (launch, _, { dataSources }) =>
+      dataSources.userAPI.isBookedOnLaunch({ launchId: launch.id })
   }
 };

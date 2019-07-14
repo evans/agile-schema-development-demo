@@ -31,7 +31,6 @@ const typeDefs = gql`
     site: String
     mission: Mission
     rocket: Rocket
-    isBooked: Boolean!
   }
 
   extend type Rocket @key(fields: "id") {

@@ -6,7 +6,7 @@ const isEmail = require("isemail");
 
 const typeDefs = require("./schema");
 const resolvers = require("./resolvers");
-const { createStore } = require("../utils");
+const { createStore } = require("./utils");
 
 const UserAPI = require("../datasources/user");
 
@@ -14,6 +14,8 @@ const internalEngineDemo = require("../engine-demo");
 
 // creates a sequelize connection once. NOT for every request
 const store = createStore();
+store.users.sync();
+store.trips.sync();
 
 // set up any dataSources our resolvers need
 const dataSources = () => ({

@@ -17,10 +17,8 @@ module.exports = {
       dataSources.launchAPI.getLaunchById({ launchId: id })
   },
   Launch: {
-    __resolveReference: ({ id }) =>
+    __resolveReference: ({ id }, { dataSources }) =>
       dataSources.launchAPI.getLaunchById({ launchId: id }),
-    isBooked: async (launch, _, { dataSources }) =>
-      dataSources.userAPI.isBookedOnLaunch({ launchId: launch.id }),
     rocket: launch => ({
       __typeName: "Rocket",
       id: launch.rocket.id

@@ -29,6 +29,7 @@ const typeDefs = gql`
 
   extend type Launch @key(fields: "id") {
     id: ID! @external
+    isBooked: Boolean!
   }
 `;
 
