@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "operations": [
+    {
+      "signature": "f2dec3cd59f79d6b2cf342e1c9857b2626a9f8d809988b1365814646eb05044a",
+      "document": "mutation cancel($launchId:ID!){cancelTrip(launchId:$launchId){__typename launches{__typename id isBooked}message success}}",
+      "metadata": {
+        "engineSignature": "mutation cancel($launchId:ID!){cancelTrip(launchId:$launchId){__typename launches{__typename id isBooked}message success}}"
+      }
+    },
+    {
+      "signature": "ce87ef8e7862618c20164e0a23a86082b6719b6ec74228b8791d351b508314a6",
+      "document": "mutation BookTrips($launchIds:[ID]!){bookTrips(launchIds:$launchIds)}",
+      "metadata": {
+        "engineSignature": "mutation BookTrips($launchIds:[ID]!){bookTrips(launchIds:$launchIds)}"
+      }
+    },
+    {
+      "signature": "ad11f7c579493f3f07bbe9121a3994ac6c6799dd7bc1808c024e8b1bbaa52118",
+      "document": "fragment LaunchTile on Launch{__typename id isBooked mission{__typename missionPatch name}rocket{__typename id name}}query GetLaunch($launchId:ID!){launch(id:$launchId){__typename...LaunchTile}}",
+      "metadata": {
+        "engineSignature": "fragment LaunchTile on Launch{__typename id isBooked mission{__typename missionPatch name}rocket{__typename id name}}query GetLaunch($launchId:ID!){launch(id:$launchId){__typename...LaunchTile}}"
+      }
+    },
+    {
+      "signature": "4a5d8f5af3a6e15bc4ca0dbee87406f68589a695274160c6bff0b76ae0fdd992",
+      "document": "fragment LaunchTile on Launch{__typename id isBooked mission{__typename missionPatch name}rocket{__typename id name}}query LaunchDetails($launchId:ID!){launch(id:$launchId){__typename rocket{__typename type}site...LaunchTile}}",
+      "metadata": {
+        "engineSignature": "fragment LaunchTile on Launch{__typename id isBooked mission{__typename missionPatch name}rocket{__typename id name}}query LaunchDetails($launchId:ID!){launch(id:$launchId){__typename rocket{__typename type}site...LaunchTile}}"
+      }
+    },
+    {
+      "signature": "0acbf21c6020ebf916b68bde96c22599cf56672d3cb618f161fa6294a105ebe8",
+      "document": "fragment LaunchTile on Launch{__typename id isBooked mission{__typename missionPatch name}rocket{__typename id name}}query GetLaunchList($after:String){launches(after:$after){__typename cursor hasMore launches{__typename...LaunchTile}}}",
+      "metadata": {
+        "engineSignature": "fragment LaunchTile on Launch{__typename id isBooked mission{__typename missionPatch name}rocket{__typename id name}}query GetLaunchList($after:String){launches(after:$after){__typename cursor hasMore launches{__typename...LaunchTile}}}"
+      }
+    },
+    {
+      "signature": "a70d5b5f31568c325f04e579f83989fac602539b154834aed39f4e539d807f96",
+      "document": "mutation login($email:String!){login(email:$email)}",
+      "metadata": {
+        "engineSignature": "mutation login($email:String!){login(email:$email)}"
+      }
+    },
+    {
+      "signature": "2a66452c8608bcee0977175fe874863f0019c3466a007ce749e4e18cbc5f784d",
+      "document": "fragment LaunchTile on Launch{__typename id isBooked mission{__typename missionPatch name}rocket{__typename id name}}query GetMyTrips{me{__typename email id trips{__typename...LaunchTile}}}",
+      "metadata": {
+        "engineSignature": "fragment LaunchTile on Launch{__typename id isBooked mission{__typename missionPatch name}rocket{__typename id name}}query GetMyTrips{me{__typename email id trips{__typename...LaunchTile}}}"
+      }
+    }
+  ]
+}

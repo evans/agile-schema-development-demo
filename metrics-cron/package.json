@@ -1,0 +1,16 @@
+{
+  "name": "fullstack-tutorial-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "artillery": "^1.6.0-28",
+    "node-cron": "^2.0.3",
+    "nodemon": "^1.19.1"
+  }
+}
