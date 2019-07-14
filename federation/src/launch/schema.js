@@ -15,20 +15,6 @@ const typeDefs = gql`
     launch(id: ID!): Launch
   }
 
-  type Mutation {
-    # if false, signup failed -- check errors
-    bookTrips(launchIds: [ID]!): Boolean!
-
-    # if false, cancellation failed -- check errors
-    cancelTrip(launchId: ID!): TripUpdateResponse!
-  }
-
-  type TripUpdateResponse {
-    success: Boolean!
-    message: String
-    launches: [Launch]
-  }
-
   """
   Simple wrapper around our list of launches that contains a cursor to the
   last item in the list. Pass this cursor to the launches query to fetch results
@@ -40,7 +26,7 @@ const typeDefs = gql`
     launches: [Launch]!
   }
 
-  type Launch {
+  type Launch @key(fields: "id") {
     id: ID!
     site: String
     mission: Mission

@@ -1,14 +1,16 @@
 require("dotenv").config();
 
 const { ApolloServer } = require("apollo-server");
+const { buildFederatedSchema } = require("@apollo/federation");
 const isEmail = require("isemail");
 
+const typeDefs = require("./schema");
 const resolvers = require("./resolvers");
-const { createStore } = require("./utils");
+const { createStore } = require("../utils");
 
-const UserAPI = require("./datasources/user");
+const UserAPI = require("../datasources/user");
 
-const internalEngineDemo = require("./engine-demo");
+const internalEngineDemo = require("../engine-demo");
 
 // creates a sequelize connection once. NOT for every request
 const store = createStore();
@@ -35,8 +37,7 @@ const context = async ({ req }) => {
 
 // Set up Apollo Server
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema: buildFederatedSchema([{ typeDefs, resolvers }]),
   dataSources,
   context,
   introspection: true,
@@ -51,18 +52,5 @@ const server = new ApolloServer({
 // if we're in a test env, we'll manually start it in a test
 if (process.env.NODE_ENV !== "test")
   server
-    .listen({ port: process.env.PORT || 4003 })
+    .listen({ port: process.env.PORT || 5003 })
     .then(({ url }) => console.log(`🚀 users service running at ${url}`));
-
-// export all the important pieces for integration/e2e tests to use
-module.exports = {
-  dataSources,
-  context,
-  typeDefs,
-  resolvers,
-  ApolloServer,
-  LaunchAPI,
-  UserAPI,
-  store,
-  server
-};

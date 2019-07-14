@@ -27,7 +27,7 @@ const typeDefs = gql`
     trips: [Launch]!
   }
 
-  type Launch @key(fields: "id") {
+  extend type Launch @key(fields: "id") {
     id: ID! @external
   }
 `;
