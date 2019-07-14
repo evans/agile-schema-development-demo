@@ -44,6 +44,8 @@ const server = new ApolloServer({
   resolvers,
   dataSources,
   context,
+  introspection: true,
+  debug: true,
   engine: {
     apiKey: process.env.ENGINE_API_KEY,
     ...internalEngineDemo
