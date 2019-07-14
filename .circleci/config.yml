@@ -22,13 +22,13 @@ jobs:
 
     steps:
       - checkout
-      - run: cd server && npm run build
+      - run: cd server && npm i
 
       - run:
           name: Output schema locally
           command: cd server && node scripts/publish.js
 
-      - run: cd server && npx apollo service:check
+      - run: cd server && npx apollo service:check --validationPeriod=P3D
 
       - run: |
           if [ "${CIRCLE_BRANCH}" == "master" ]; then
