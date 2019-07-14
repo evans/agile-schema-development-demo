@@ -32,6 +32,7 @@ const gateway = new ApolloGateway({
     debug: true,
     engine: {
       apiKey: process.env.ENGINE_API_KEY,
+      schemaTag: "federated",
       ...internalEngineDemo
     },
     context: ({ req }) => {
