@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 
 import Button from "../components/button";
 import { CartItem } from ".";
-import { GET_MY_TRIPS } from "../pages/bookedMisisons";
+import { GET_MY_TRIPS } from "../pages/bookedTrips";
 
 export const BOOK_TRIPS = gql`
   mutation BookTrips($launchIds: [ID]!) {

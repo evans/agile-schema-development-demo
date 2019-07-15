@@ -3,7 +3,7 @@ import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 
 import { GET_LAUNCH_DETAILS } from "../pages/launch";
-import { GET_MY_TRIPS } from "../pages/bookedMisisons";
+import { GET_MY_TRIPS } from "../pages/bookedTrips";
 import Button from "../components/button";
 import { LAUNCH_TILE_DATA } from "../pages/launches";
 
@@ -12,7 +12,9 @@ export { GET_LAUNCH_DETAILS };
 
 export const TOGGLE_CART = gql`
   mutation addOrRemoveFromCart($launchId: ID!) {
-    addOrRemoveFromCart(id: $launchId) @client
+    addOrRemoveFromCart(id: $launchId) @client {
+      id
+    }
   }
 `;
 

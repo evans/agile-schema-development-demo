@@ -5,7 +5,7 @@ import Launch from "./launch";
 import Launches from "./launches";
 import Cart from "./cart";
 import { Footer, PageContainer } from "../components";
-import BookedMissions from "./bookedMisisons";
+import BookedTrips from "./bookedTrips";
 
 export default function Pages() {
   return (
@@ -17,7 +17,7 @@ export default function Pages() {
           <Cart path="cart" />
         </Router>
       </PageContainer>
-      <BookedMissions />
+      <BookedTrips />
       <Footer />
     </Fragment>
   );

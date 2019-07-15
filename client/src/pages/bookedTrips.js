@@ -21,10 +21,10 @@ export const GET_MY_TRIPS = gql`
   ${LAUNCH_TILE_DATA}
 `;
 
-export default function BookedMissions() {
+export default function BookedTrips() {
   return (
     <Sidebar>
-      <div>Booked Missions</div>
+      <div>Booked Trips</div>
       <Query
         query={GET_MY_TRIPS}
         partialRefetch={true}
