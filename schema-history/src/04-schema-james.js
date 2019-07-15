@@ -17,6 +17,9 @@ const typeDefs = gql`
   }
 
   type Mutation {
+    # if false, signup failed
+    bookTrips(launchIds: [ID]!): Boolean!
+
     login(email: String): String # login token
   }
 
