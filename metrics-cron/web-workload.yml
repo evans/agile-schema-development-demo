@@ -2,13 +2,13 @@ config:
   target: "https://graph-manager-demo.herokuapp.com/"
   phases:
     - duration: 60
-      arrivalRate: 2
+      arrivalRate: 5
 scenarios:
   - flow:
       - post:
           headers:
-            client-name: "Space Explorer [iOS]"
-            client-version: "2.0.2"
+            client-name: "Space Explorer [web]"
+            client-version: "1.0.0"
           url: "/"
           json:
             query: |
@@ -20,8 +20,8 @@ scenarios:
             as: "token"
       - post:
           headers:
-            client-name: "Space Explorer [iOS]"
-            client-version: "2.0.2"
+            client-name: "Space Explorer [web]"
+            client-version: "1.0.0"
           url: "/"
           json:
             query: |
@@ -56,43 +56,8 @@ scenarios:
       - post:
           url: "/"
           headers:
-            client-name: "Space Explorer [iOS]"
-            client-version: "2.0.2"
-          json:
-            query: |
-              fragment LaunchTile on Launch {
-                __typename
-                id
-                isBooked
-                rocket {
-                  __typename
-                  id
-                  name
-                }
-                mission {
-                  __typename
-                  name
-                  missionPatch
-                }
-              }
-              query LaunchDetails($launchId: ID!) {
-                launch(id: $launchId) {
-                  __typename
-                  site
-                  rocket {
-                    __typename
-                    type
-                  }
-                  ...LaunchTile
-                }
-              }
-            variables:
-              launchId: "{{ id }}"
-      - post:
-          url: "/"
-          headers:
-            client-name: "Space Explorer [iOS]"
-            client-version: "2.0.2"
+            client-name: "Space Explorer [web]"
+            client-version: "1.0.0"
           json:
             query: |
               fragment LaunchTile on Launch {
@@ -126,8 +91,8 @@ scenarios:
       - post:
           headers:
             authorization: "{{token}}"
-            client-name: "Space Explorer [iOS]"
-            client-version: "2.0.2"
+            client-name: "Space Explorer [web]"
+            client-version: "1.0.0"
           url: "/"
           json:
             query: |
@@ -137,8 +102,8 @@ scenarios:
       - post:
           headers:
             authorization: "{{token}}"
-            client-name: "Space Explorer [iOS]"
-            client-version: "2.0.2"
+            client-name: "Space Explorer [web]"
+            client-version: "1.0.0"
           url: "/"
           json:
             query: |
