@@ -21,7 +21,7 @@ export const GET_MY_TRIPS = gql`
   ${LAUNCH_TILE_DATA}
 `;
 
-export default function Profile() {
+export default function BookedMissions() {
   return (
     <Sidebar>
       <div>Booked Missions</div>

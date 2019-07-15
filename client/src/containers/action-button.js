@@ -3,7 +3,7 @@ import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 
 import { GET_LAUNCH_DETAILS } from "../pages/launch";
-import { GET_MY_TRIPS } from "../pages/profile";
+import { GET_MY_TRIPS } from "../pages/bookedMisisons";
 import Button from "../components/button";
 import { LAUNCH_TILE_DATA } from "../pages/launches";
 
