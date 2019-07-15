@@ -23,7 +23,7 @@ module.exports = {
     bookTrips: async (_, { launchIds }, { dataSources }) => {
       const results = await dataSources.userAPI.bookTrips({ launchIds });
 
-      return results.length;
+      return Boolean(results) && results.length === launchIds.length;
     },
     cancelTrip: async (_, { launchId }, { dataSources }) => {
       const result = dataSources.userAPI.cancelTrip({ launchId });
@@ -80,6 +80,8 @@ module.exports = {
       const launchIds = await dataSources.userAPI.getLaunchIdsByUser();
 
       if (!launchIds.length) return [];
+
+      await new Promise(resolve => setTimeout(resolve, 5000));
 
       // look up those launches by their ids
       return (
