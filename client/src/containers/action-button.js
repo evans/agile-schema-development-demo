@@ -38,11 +38,25 @@ export default function ActionButton({ isBooked, id, isInCart }) {
         {
           query: GET_LAUNCH_DETAILS,
           variables: { launchId: id }
-        },
-        {
-          query: GET_MY_TRIPS
         }
       ]}
+      update={(cache, { data }) => {
+        const result = cache.readQuery({ query: GET_MY_TRIPS });
+        cache.writeQuery({
+          query: GET_MY_TRIPS,
+          data: {
+            me: {
+              ...result.me,
+              trips: result.me.trips.filter(
+                ({ id }) =>
+                  !data.cancelTrip.launches.find(
+                    ({ id: cancelledId }) => cancelledId === id
+                  )
+              )
+            }
+          }
+        });
+      }}
     >
       {(mutate, { loading, error }) => {
         if (loading) return <p>Loading...</p>;
