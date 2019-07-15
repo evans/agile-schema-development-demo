@@ -1,9 +1,11 @@
 config:
   target: "https://graph-manager-demo.herokuapp.com/"
   phases:
+    - duration: 120
+      arrivalRate: 5
     - duration: 60
       arrivalRate: 5
-      rampTo: 10
+      rampTo: 50
 scenarios:
   - flow:
       - post:
