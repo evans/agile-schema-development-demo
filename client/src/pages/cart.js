@@ -3,7 +3,7 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
 import { Header, Loading } from "../components";
-import { BookTrips } from "../containers";
+import { CartContents } from "../containers";
 
 export const GET_CART_ITEMS = gql`
   query GetCartItems {
@@ -20,7 +20,7 @@ export default function Cart() {
         return (
           <Fragment>
             <Header>My Cart</Header>
-            <BookTrips cartItems={data && data.cartItems} />
+            <CartContents cartItems={data && data.cartItems} />
           </Fragment>
         );
       }}

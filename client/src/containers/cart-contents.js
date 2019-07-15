@@ -3,7 +3,7 @@ import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 
 import Button from "../components/button";
-import { CartItem } from "../containers";
+import { CartItem } from ".";
 import { GET_MY_TRIPS } from "../pages/profile";
 
 export const BOOK_TRIPS = gql`
@@ -12,7 +12,7 @@ export const BOOK_TRIPS = gql`
   }
 `;
 
-export default function BookTrips({ cartItems }) {
+export default function CartContents({ cartItems }) {
   return (
     <Mutation
       mutation={BOOK_TRIPS}
