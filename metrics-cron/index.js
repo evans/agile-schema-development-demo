@@ -4,11 +4,12 @@ const { fork } = require("child_process");
 
 cron.schedule("* * * * *", () => {
   console.log("running a task every minute");
-  fork(__dirname + "/worker", ["ios-workload.yml"]);
-  fork(__dirname + "/worker", ["android-workload.yml"]);
-  fork(__dirname + "/worker", ["web-workload.yml"]);
-  // run("android-workload.yml", {});
-  // run("ios-workload.yml", {});
+  // fork(__dirname + "/worker", ["ios-workload.yml"]);
+  // fork(__dirname + "/worker", ["android-workload.yml"]);
+  // fork(__dirname + "/worker", ["web-workload.yml"]);
+  run("android-workload.yml", {});
+  run("ios-workload.yml", {});
+  run("web-workload.yml", {});
 });
 const port = process.env.PORT || "4000";
 // run("ios-workload.yml", { variables: JSON.stringify({ port }) });
