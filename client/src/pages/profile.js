@@ -1,5 +1,5 @@
 import styled from "react-emotion";
-import React from "react";
+import React, { Fragment } from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
@@ -23,29 +23,35 @@ export const GET_MY_TRIPS = gql`
 
 export default function Profile() {
   return (
-    <Query query={GET_MY_TRIPS} partialRefetch={true}>
-      {({ data, loading, error }) => {
-        if (loading) return <Loading />;
-        if (error) return <p>ERROR: {error.message}</p>;
+    <Sidebar>
+      <div>Booked Missions</div>
+      <Query
+        query={GET_MY_TRIPS}
+        partialRefetch={true}
+        notifyOnNetworkStatusChange={true}
+      >
+        {({ data, loading, error }) => {
+          if (loading) return <Loading />;
+          if (error) return <p>ERROR: {error.message}</p>;
 
-        return (
-          <Sidebar>
-            <div>Booked Missions</div>
-            {data.me && data.me.trips.length ? (
-              data.me.trips.map(({ id, mission }) => (
-                <div>
-                  <p>
-                    <Link to={`/launch/${id}`}>{mission.name}</Link>
-                  </p>
-                </div>
-              ))
-            ) : (
-              <p>You haven't booked any trips</p>
-            )}
-          </Sidebar>
-        );
-      }}
-    </Query>
+          return (
+            <Fragment>
+              {data.me && data.me.trips.length ? (
+                data.me.trips.map(({ id, mission }) => (
+                  <div>
+                    <p>
+                      <Link to={`/launch/${id}`}>{mission.name}</Link>
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <p>You haven't booked any trips</p>
+              )}
+            </Fragment>
+          );
+        }}
+      </Query>
+    </Sidebar>
   );
 }
 
