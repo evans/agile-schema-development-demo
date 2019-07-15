@@ -4,8 +4,8 @@ import { Router } from "@reach/router";
 import Launch from "./launch";
 import Launches from "./launches";
 import Cart from "./cart";
-import Profile from "./profile";
 import { Footer, PageContainer } from "../components";
+import BookedMissions from "./bookedMisisons";
 
 export default function Pages() {
   return (
@@ -17,7 +17,7 @@ export default function Pages() {
           <Cart path="cart" />
         </Router>
       </PageContainer>
-      <Profile />
+      <BookedMissions />
       <Footer />
     </Fragment>
   );
