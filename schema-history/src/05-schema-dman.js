@@ -80,7 +80,7 @@ module.exports = {
   gitContext: {
     remoteUrl: "git@github.com:apollographql/space-explorer.git",
     commit: "679b760b9ff7ef60e01c1c9029fb2de397a8c31b",
-    committer: "Jake Dawkins <dawkinsjh@gmail.com>",
+    committer: "Danielle Man <daniman0808@gmail.com>",
     branch: "master"
   }
 };

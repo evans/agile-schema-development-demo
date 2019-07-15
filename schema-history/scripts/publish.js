@@ -19,7 +19,7 @@ const schemaFiles = [
   "02-schema-hugh",
   "03-schema-justin",
   "04-schema-james",
-  "05-schema-jake"
+  "05-schema-dman"
 ];
 
 const typeDefsAndContext = schemaFiles.map(file => require(`../src/${file}`));
