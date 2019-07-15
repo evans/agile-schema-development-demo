@@ -23,21 +23,7 @@ module.exports = {
     bookTrips: async (_, { launchIds }, { dataSources }) => {
       const results = await dataSources.userAPI.bookTrips({ launchIds });
 
-      return Boolean(results) && results.length === launchIds.length;
-    },
-    bookTripsWithResponse: async (_, { launchIds }, { dataSources }) => {
-      const results = await dataSources.userAPI.bookTrips({ launchIds });
-
-      return {
-        success: Boolean(results) && results.length === launchIds.length,
-        message:
-          results && results.length === launchIds.length
-            ? "booked successfully"
-            : `failed to book ${launchIds.filter(id =>
-                results.find(launchId => launchId === id)
-              )}`,
-        launchIds
-      };
+      return results.length;
     },
     cancelTrip: async (_, { launchId }, { dataSources }) => {
       const result = dataSources.userAPI.cancelTrip({ launchId });
