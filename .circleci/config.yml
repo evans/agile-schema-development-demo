@@ -8,7 +8,6 @@ jobs:
     steps:
       - checkout
       - run: cd client && npm ci
-      - run: cd client && npm test
       - run: cd client && npx apollo client:check || echo 'validation failed'
 
       - run: |
