@@ -1,9 +1,12 @@
-import React, { Fragment } from 'react';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
+import styled from "react-emotion";
+import React from "react";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
 
-import { Loading, Header, LaunchTile } from '../components';
-import { LAUNCH_TILE_DATA } from './launches';
+import { Loading } from "../components";
+import { LAUNCH_TILE_DATA } from "./launches";
+import { unit } from "../styles";
+import { Link } from "@reach/router";
 
 export const GET_MY_TRIPS = gql`
   query GetMyTrips {
@@ -20,24 +23,38 @@ export const GET_MY_TRIPS = gql`
 
 export default function Profile() {
   return (
-    <Query query={GET_MY_TRIPS} fetchPolicy="network-only">
+    <Query query={GET_MY_TRIPS} partialRefetch={true}>
       {({ data, loading, error }) => {
         if (loading) return <Loading />;
         if (error) return <p>ERROR: {error.message}</p>;
 
         return (
-          <Fragment>
-            <Header>My Trips</Header>
+          <Sidebar>
+            <div>Booked Missions</div>
             {data.me && data.me.trips.length ? (
-              data.me.trips.map(launch => (
-                <LaunchTile key={launch.id} launch={launch} />
+              data.me.trips.map(({ id, mission }) => (
+                <div>
+                  <p>
+                    <Link to={`/launch/${id}`}>{mission.name}</Link>
+                  </p>
+                </div>
               ))
             ) : (
               <p>You haven't booked any trips</p>
             )}
-          </Fragment>
+          </Sidebar>
         );
       }}
     </Query>
   );
 }
+
+const Sidebar = styled("div")({
+  position: "fixed",
+  top: unit * 4,
+  right: "0",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  flexGrow: 1
+});

@@ -1,9 +1,11 @@
-import React from 'react';
-import { Mutation } from 'react-apollo';
-import gql from 'graphql-tag';
+import React from "react";
+import { Mutation } from "react-apollo";
+import gql from "graphql-tag";
 
-import { GET_LAUNCH_DETAILS } from '../pages/launch';
-import Button from '../components/button';
+import { GET_LAUNCH_DETAILS } from "../pages/launch";
+import { GET_MY_TRIPS } from "../pages/profile";
+import Button from "../components/button";
+import { LAUNCH_TILE_DATA } from "../pages/launches";
 
 // export all queries used in this file for testing
 export { GET_LAUNCH_DETAILS };
@@ -20,11 +22,11 @@ export const CANCEL_TRIP = gql`
       success
       message
       launches {
-        id
-        isBooked
+        ...LaunchTile
       }
     }
   }
+  ${LAUNCH_TILE_DATA}
 `;
 
 export default function ActionButton({ isBooked, id, isInCart }) {
@@ -35,8 +37,11 @@ export default function ActionButton({ isBooked, id, isInCart }) {
       refetchQueries={[
         {
           query: GET_LAUNCH_DETAILS,
-          variables: { launchId: id },
+          variables: { launchId: id }
         },
+        {
+          query: GET_MY_TRIPS
+        }
       ]}
     >
       {(mutate, { loading, error }) => {
@@ -48,13 +53,13 @@ export default function ActionButton({ isBooked, id, isInCart }) {
             <Button
               onClick={mutate}
               isBooked={isBooked}
-              data-testid={'action-button'}
+              data-testid={"action-button"}
             >
               {isBooked
-                ? 'Cancel This Trip'
+                ? "Cancel This Trip"
                 : isInCart
-                  ? 'Remove from Cart'
-                  : 'Add to Cart'}
+                ? "Remove from Cart"
+                : "Add to Cart"}
             </Button>
           </div>
         );
