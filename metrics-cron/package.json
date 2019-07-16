@@ -4,13 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index.js"
+    "start": "while true; do node ./index.js; done"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "artillery": "^1.6.0-28",
-    "node-cron": "^2.0.3",
-    "nodemon": "^1.19.1"
+    "node-cron": "^2.0.3"
   }
 }
