@@ -2,6 +2,7 @@ import React from "react";
 import styled from "react-emotion";
 
 import MenuItem from "./menu-item";
+import CartBubble from "./cart-bubble";
 import LogoutButton from "../containers/logout-button";
 import { ReactComponent as HomeIcon } from "../assets/icons/home.svg";
 import { ReactComponent as CartIcon } from "../assets/icons/cart.svg";
@@ -16,7 +17,16 @@ export default function Footer() {
           Home
         </MenuItem>
         <MenuItem to="/cart">
-          <CartIcon />
+          <div
+            style={{
+              position: "relative",
+              margin: "0 auto",
+              width: "60px"
+            }}
+          >
+            <CartBubble />
+            <CartIcon />
+          </div>
           Cart
         </MenuItem>
         <LogoutButton />
