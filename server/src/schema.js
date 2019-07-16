@@ -19,7 +19,7 @@ const typeDefs = gql`
   type Mutation {
     # if false, signup failed -- check errors
     bookTrips(launchIds: [ID]!): Boolean!
-      @deprecate(reason: "use bookTripsWithReponse")
+      @deprecated(reason: "use bookTripsWithReponse")
 
     bookTripsWithReponse(launchIds: [ID]!): TripUpdateResponse!
 
