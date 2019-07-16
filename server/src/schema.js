@@ -18,7 +18,9 @@ const typeDefs = gql`
 
   type Mutation {
     # if false, signup failed -- check errors
-    bookTrips(launchIds: [ID]!): TripUpdateResponse!
+    bookTrips(launchIds: [ID]!): Boolean!
+
+    bookTripsWithReponse(launchIds: [ID]!): TripUpdateResponse!
 
     # if false, cancellation failed -- check errors
     cancelTrip(launchId: ID!): TripUpdateResponse!

@@ -23,6 +23,11 @@ module.exports = {
     bookTrips: async (_, { launchIds }, { dataSources }) => {
       const results = await dataSources.userAPI.bookTrips({ launchIds });
 
+      return Boolean(results) && results.length === launchIds.length;
+    },
+    bookTripsWithReponse: async (_, { launchIds }, { dataSources }) => {
+      const results = await dataSources.userAPI.bookTrips({ launchIds });
+
       return {
         success: Boolean(results) && results.length === launchIds.length,
         message:
