@@ -5,7 +5,6 @@ import gql from "graphql-tag";
 
 import { Loading } from "../components";
 import { LAUNCH_TILE_DATA } from "./launches";
-import { unit, colors } from "../styles";
 import { Link } from "@reach/router";
 
 export const GET_MY_TRIPS = gql`
