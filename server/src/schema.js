@@ -29,7 +29,7 @@ const typeDefs = gql`
     """
     if false, signup failed -- check errors
     """
-    bookTrips(launchIds: [ID]!): Boolean!
+    bookTrips(launchIds: [ID]!): TripUpdateResponse!
 
     """
     if false, signup failed -- check errors
