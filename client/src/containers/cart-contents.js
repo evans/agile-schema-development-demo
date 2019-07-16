@@ -3,6 +3,7 @@ import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 
 import Button from "../components/button";
+import BookSuccess from "../components/book-success";
 import { CartItem } from ".";
 import { GET_MY_TRIPS } from "../pages/bookedTrips";
 
@@ -29,7 +30,7 @@ export default function CartContents({ cartItems }) {
         if (!cartItems || (!cartItems.length && !data)) {
           return <p>No items in your cart</p>;
         } else if (data && data.bookTrips) {
-          return <p>Booked Successfully!</p>;
+          return <BookSuccess />;
         } else if (data && !data.bookTrips) {
           return <p>Failed to book</p>;
         }

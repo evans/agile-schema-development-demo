@@ -5,7 +5,7 @@ import gql from "graphql-tag";
 
 import { Loading } from "../components";
 import { LAUNCH_TILE_DATA } from "./launches";
-import { unit } from "../styles";
+import { unit, colors } from "../styles";
 import { Link } from "@reach/router";
 
 export const GET_MY_TRIPS = gql`
@@ -24,7 +24,7 @@ export const GET_MY_TRIPS = gql`
 export default function BookedTrips() {
   return (
     <Sidebar>
-      <div>Booked Trips</div>
+      <StyledHeader>Booked Trips</StyledHeader>
       <Query
         query={GET_MY_TRIPS}
         partialRefetch={true}
@@ -37,15 +37,11 @@ export default function BookedTrips() {
           return (
             <Fragment>
               {data.me && data.me.trips.length ? (
-                data.me.trips.map(({ id, mission }) => (
-                  <div>
-                    <p>
-                      <Link to={`/launch/${id}`}>{mission.name}</Link>
-                    </p>
-                  </div>
+                data.me.trips.map(({ id, mission, rocket }) => (
+                  <BookedTrip id={id} mission={mission} rocket={rocket} />
                 ))
               ) : (
-                <p>You haven't booked any trips</p>
+                <StyledEmpty>You haven't booked any trips yet. :(</StyledEmpty>
               )}
             </Fragment>
           );
@@ -57,10 +53,60 @@ export default function BookedTrips() {
 
 const Sidebar = styled("div")({
   position: "fixed",
-  top: unit * 4,
+  margin: "32px",
   right: "0",
   display: "flex",
   flexDirection: "column",
+  alignItems: "flex-start",
+  flexGrow: 1,
+  width: "240px"
+});
+
+const StyledLink = styled(Link)({
+  fontFamily: "monospace",
+  color: "#343c5a",
+  textDecoration: "none",
+  backgroundColor: "white",
+  boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+  borderRadius: "4px",
+  height: "40px",
+  width: "240px",
+  display: "flex",
   alignItems: "center",
-  flexGrow: 1
+  fontSize: "15px",
+  marginBottom: "16px"
+});
+
+const StyledArrow = styled("div")({
+  color: "#2075D6",
+  paddingLeft: "7px",
+  paddingRight: "7px"
+});
+
+const StyledMission = styled("div")({
+  flex: "1",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+  paddingLeft: "16px"
+});
+
+const BookedTrip = ({ id, mission, rocket }) => (
+  <StyledLink to={`/launch/${id}`}>
+    <StyledMission>
+      {mission.name} on {rocket.name}
+    </StyledMission>
+    <StyledArrow>→</StyledArrow>
+  </StyledLink>
+);
+
+const StyledHeader = styled("div")({
+  padding: "16px",
+  fontSize: "13px",
+  fontWeight: "600"
+});
+
+const StyledEmpty = styled("div")({
+  paddingLeft: "16px",
+  fontSize: "13px"
 });

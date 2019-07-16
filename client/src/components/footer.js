@@ -52,6 +52,6 @@ const InnerContainer = styled("div")({
   display: "flex",
   alignItems: "center",
   maxWidth: 460,
-  padding: unit * 2.5,
+  padding: "10px",
   margin: "0 auto"
 });

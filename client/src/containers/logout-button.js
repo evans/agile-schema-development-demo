@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'react-emotion';
-import { ApolloConsumer } from 'react-apollo';
+import React from "react";
+import styled from "react-emotion";
+import { ApolloConsumer } from "react-apollo";
 
-import { menuItemClassName } from '../components/menu-item';
-import { ReactComponent as ExitIcon } from '../assets/icons/exit.svg';
+import { menuItemClassName } from "../components/menu-item";
+import { ReactComponent as ExitIcon } from "../assets/icons/exit.svg";
 
 export default function LogoutButton() {
   return (
@@ -27,8 +27,13 @@ export default function LogoutButton() {
  * STYLED COMPONENTS USED IN THIS FILE ARE BELOW HERE
  */
 
-const StyledButton = styled('button')(menuItemClassName, {
-  background: 'none',
-  border: 'none',
-  padding: 0,
+const StyledButton = styled("button")(menuItemClassName, {
+  background: "none",
+  border: "none",
+  paddingTop: "10px",
+  paddingBottom: "10px",
+  borderRadius: "20px",
+  ":hover": {
+    opacity: "0.75"
+  }
 });
