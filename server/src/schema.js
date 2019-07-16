@@ -2,6 +2,9 @@ const { gql } = require("apollo-server");
 
 const typeDefs = gql`
   type Query {
+    """
+    Launches from spaceX api
+    """
     launches(
       """
       The number of results to show. Must be >= 1. Default = 20
@@ -12,17 +15,30 @@ const typeDefs = gql`
       """
       after: String
     ): LaunchConnection!
+    """
+    Launch from spaceX api
+    """
     launch(id: ID!): Launch
+    """
+    Current user
+    """
     me: User
   }
 
   type Mutation {
-    # if false, signup failed -- check errors
+    """
+    if false, signup failed -- check errors
+    """
     bookTrips(launchIds: [ID]!): Boolean!
 
-    # if false, cancellation failed -- check errors
+    """
+    if false, signup failed -- check errors
+    """
     cancelTrip(launchId: ID!): TripUpdateResponse!
 
+    """
+    user login
+    """
     login(email: String): String # login token
   }
 
