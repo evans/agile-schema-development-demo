@@ -30,6 +30,12 @@ const typeDefs = gql`
     if false, signup failed -- check errors
     """
     bookTrips(launchIds: [ID]!): Boolean!
+      @deprecated(reason: "use bookTripsWithResponse")
+
+    """
+    if false, signup failed -- check errors
+    """
+    bookTripsWithResponse(launchIds: [ID]!): TripUpdateResponse!
 
     """
     if false, signup failed -- check errors
