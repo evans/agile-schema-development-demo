@@ -1,0 +1,84 @@
+config:
+  target: "https://graph-manager-demo.herokuapp.com/"
+  phases:
+    - duration: 70
+      arrivalCount: 6
+scenarios:
+  - flow:
+      - post:
+          headers:
+            client-name: "Explorer Slack Bot"
+          url: "/"
+          json:
+            query: |
+              mutation login($email:String!){login(email:$email)}
+            variables:
+              email: "evans@apollo"
+          capture:
+            json: "$.data.login"
+            as: "token"
+      - post:
+          headers:
+            client-name: "Explorer Slack Bot"
+          url: "/"
+          json:
+            query: |
+              fragment LaunchTile on Launch {
+                __typename
+                id
+                isBooked
+                rocket {
+                  __typename
+                  id
+                  name
+                }
+                mission {
+                  __typename
+                  name
+                }
+              }
+              query GetLaunchs($after: String) {
+                launches(after: $after) {
+                  __typename
+                  launches {
+                    ...LaunchTile
+                  }
+                }
+              }
+          capture:
+            json: "$.data.launches.launches[0].id"
+            as: "id"
+      - post:
+          url: "/"
+          headers:
+            client-name: "Explorer Slack Bot"
+          json:
+            query: |
+              fragment LaunchTile on Launch {
+                __typename
+                id
+                isBooked
+                rocket {
+                  __typename
+                  id
+                  name
+                }
+                mission {
+                  __typename
+                  name
+                  missionPatch
+                }
+              }
+              query LaunchDetails($launchId: ID!) {
+                launch(id: $launchId) {
+                  __typename
+                  site
+                  rocket {
+                    __typename
+                    type
+                  }
+                  ...LaunchTile
+                }
+              }
+            variables:
+              launchId: "{{ id }}"

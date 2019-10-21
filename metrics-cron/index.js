@@ -10,6 +10,7 @@ cron.schedule("* * * * *", () => {
   run("android-workload.yml", {});
   run("ios-workload.yml", {});
   run("web-workload.yml", {});
+  run("slack-workload.yml", {});
 });
 const port = process.env.PORT || "4000";
 // run("ios-workload.yml", { variables: JSON.stringify({ port }) });
