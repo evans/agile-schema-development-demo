@@ -22,7 +22,6 @@ export const CANCEL_TRIP = gql`
   mutation cancel($launchId: ID!) {
     cancelTrip(launchId: $launchId) {
       success
-      message
       launches {
         ...LaunchTile
       }
