@@ -92,6 +92,9 @@ const typeDefs = gql`
     launches: [Launch]!
   }
 
+  """
+  launch from spaceX api
+  """
   type Launch {
     """
     unique identifier for the launch
@@ -115,6 +118,9 @@ const typeDefs = gql`
     isBooked: Boolean!
   }
 
+  """
+  Rocket from spaceX api
+  """
   type Rocket {
     """
     unique identifier for the rocket
@@ -130,6 +136,9 @@ const typeDefs = gql`
     type: String
   }
 
+  """
+  User information
+  """
   type User {
     """
     unique identifier for the user
@@ -145,6 +154,9 @@ const typeDefs = gql`
     trips: [Launch]!
   }
 
+  """
+  mission from spaceX api
+  """
   type Mission {
     """
     user-facing name of mission
