@@ -3,12 +3,12 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
 export const GET_CART_ITEMS = gql`
-  query GetCartItems {
+  query CartBubble_GetCartItems {
     cartItems @client
   }
 `;
 
-export default function Cart() {
+export default function CartBubble() {
   return (
     <Query query={GET_CART_ITEMS}>
       {({ data, loading, error }) => {
