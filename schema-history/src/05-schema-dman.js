@@ -6,7 +6,7 @@ const typeDefs = gql`
   """
   type Query {
     """
-    Get paginated list of launches
+    Get paginated list of launches from spaceX api
     """
     launches(
       """
@@ -19,7 +19,7 @@ const typeDefs = gql`
       after: String
     ): LaunchConnection!
     """
-    Get launch by id
+    Get launch by id from spaceX api
     """
     launch(
       """
@@ -39,13 +39,13 @@ const typeDefs = gql`
   type Mutation {
     """
     Book launches as trips for currently logged in user
-    if false, signup failed
+    if false, booking failed
     """
     bookTrips(launchIds: [ID]!): Boolean!
 
     """
     Cancel launch for currently logged in user
-    if false, cancellation failed -- check errors
+    if success is false, cancellation failed -- check errors
     """
     cancelTrip(launchId: ID!): TripUpdateResponse!
 
@@ -66,10 +66,6 @@ const typeDefs = gql`
     Whether mutation completed its side-effects
     """
     success: Boolean!
-    """
-    Error message in case of failure
-    """
-    message: String
     """
     Launches afffected by the Mutation
     """
