@@ -10,6 +10,9 @@ const typeDefs = gql`
     if false, booking failed
     """
     bookTrips(launchIds: [ID]!): Boolean!
+      @deprecated(
+        reason: "use bookTripWithResponse, because it returns data to update your cache"
+      )
 
     """
     Book launches as trips for currently logged in user
