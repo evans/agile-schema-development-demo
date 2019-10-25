@@ -9,7 +9,7 @@ const typeDefs = gql`
     Book launches as trips for currently logged in user
     if false, booking failed
     """
-    bookTrips(launchIds: [ID]!): Boolean!
+    bookTrips(launchIds: [ID]!): TripUpdateResponse!
 
     """
     Cancel launch for currently logged in user
