@@ -4,14 +4,6 @@ module.exports.Mutation = {
 
     return Boolean(results) && results.length === launchIds.length;
   },
-  bookTripsWithResponse: async (_, { launchIds }, { dataSources }) => {
-    const results = await dataSources.userAPI.bookTrips({ launchIds });
-
-    return {
-      success: Boolean(results) && results.length === launchIds.length,
-      launchIds
-    };
-  },
   cancelTrip: async (_, { launchId }, { dataSources }) => {
     const result = dataSources.userAPI.cancelTrip({ launchId });
 
