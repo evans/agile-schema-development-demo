@@ -35,7 +35,7 @@ const typeDefs = gql`
     """
     success: Boolean!
     """
-    Launches afffected by the Mutation
+    Launches affected by the mutation
     """
     launches: [Launch]
   }

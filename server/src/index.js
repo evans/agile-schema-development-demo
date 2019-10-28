@@ -1,4 +1,5 @@
 require("dotenv").config();
+require("../scripts/publish")
 
 const { ApolloServer } = require("apollo-server");
 const isEmail = require("isemail");
