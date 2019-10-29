@@ -1,4 +1,6 @@
 const { RESTDataSource } = require("apollo-datasource-rest");
+const fs = require("fs").promises;
+const existsSync = require("fs").existsSync;
 
 class LaunchAPI extends RESTDataSource {
   constructor() {
@@ -26,19 +28,56 @@ class LaunchAPI extends RESTDataSource {
   }
 
   async getAllLaunches({ offset, limit, order } = {}) {
-    const response = await this.get("launches", { offset, limit, order });
+    try {
+      const response = await this.get("launches", { offset, limit, order });
+      if (!existsSync(`./data/launch/${offset}-${limit}-${order}`)) {
+        fs.mkdir(`./data/launch`, { recursive: true });
+        fs.writeFile(
+          `./data/launch/${offset}-${limit}-${order}`,
+          JSON.stringify(response)
+        );
+      }
 
-    // transform the raw launches to a more friendly
-    return Array.isArray(response)
-      ? response.map(launch => {
-          return this.launchReducer(launch);
-        })
-      : [];
+      // transform the raw launches to a more friendly
+      return Array.isArray(response)
+        ? response.map(launch => {
+            return this.launchReducer(launch);
+          })
+        : [];
+    } catch (error) {
+      if (existsSync(`./data/launch/${offset}-${limit}-${order}`)) {
+        const resultFromCache = JSON.parse(
+          await fs.readFile(`./data/launch/${offset}-${limit}-${order}`)
+        );
+        return Array.isArray(resultFromCache)
+          ? resultFromCache.map(launch => {
+              return this.launchReducer(launch);
+            })
+          : [];
+      } else {
+        throw error;
+      }
+    }
   }
 
   async getLaunchById({ launchId }) {
-    const res = await this.get("launches", { flight_number: launchId });
-    return this.launchReducer(res[0]);
+    try {
+      const res = await this.get("launches", { flight_number: launchId });
+
+      if (!existsSync(`./data/launch/${launchId}`)) {
+        fs.mkdir(`./data/launch`, { recursive: true });
+        fs.writeFile(`./data/launch/${launchId}`, JSON.stringify(res));
+      }
+
+      return this.launchReducer(res[0]);
+    } catch (error) {
+      if (existsSync(`./data/launch/${launchId}`)) {
+        const resultFromCache = await fs.readFile(`./data/launch/${launchId}`);
+        return this.launchReducer(JSON.parse(resultFromCache)[0]);
+      } else {
+        throw error;
+      }
+    }
   }
 
   async getLaunchesByIds({ launchIds }) {
