@@ -5,7 +5,7 @@ module.exports.User = {
 
     if (!launchIds.length) return [];
 
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 4000));
 
     // look up those launches by their ids
     return (
