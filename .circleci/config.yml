@@ -11,7 +11,7 @@ jobs:
           name: Attempt to restore node_modules cache (keyed on package-lock.json and circle config)
           keys:
             - client-node-modules-cache--{{ checksum "client/package-lock.json" }}--{{ checksum ".circleci/config.yml" }}
-      - run: cd client && npm ci
+      - run: cd client && npm i
       - save_cache:
           name: Save node_modules cache (keyed on package-lock.json and circle config)
           key: client-node-modules-cache--{{ checksum "client/package-lock.json" }}--{{ checksum ".circleci/config.yml" }}
