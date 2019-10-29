@@ -1,4 +1,4 @@
-import styled from "react-emotion";
+import styled, { keyframes } from "react-emotion";
 import React, { Fragment } from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
@@ -61,6 +61,17 @@ const Sidebar = styled("div")({
   width: "240px"
 });
 
+const slideIn = keyframes`
+to {
+  transform: translate3d(0,0,0);
+}
+
+from {
+  transform: translate3d(100px,0,0);
+  opacity: 0;
+}
+`;
+
 const StyledLink = styled(Link)({
   fontFamily: "monospace",
   color: "#343c5a",
@@ -73,7 +84,8 @@ const StyledLink = styled(Link)({
   display: "flex",
   alignItems: "center",
   fontSize: "15px",
-  marginBottom: "16px"
+  marginBottom: "16px",
+  animation: `${slideIn} 400ms ease-in-out`
 });
 
 const StyledArrow = styled("div")({

@@ -7,7 +7,16 @@ jobs:
 
     steps:
       - checkout
-      - run: cd client && npm ci
+      - restore_cache:
+          name: Attempt to restore node_modules cache (keyed on package-lock.json and circle config)
+          keys:
+            - client-node-modules-cache--{{ checksum "client/package-lock.json" }}--{{ checksum ".circleci/config.yml" }}
+      - run: cd client && npm i
+      - save_cache:
+          name: Save node_modules cache (keyed on package-lock.json and circle config)
+          key: client-node-modules-cache--{{ checksum "client/package-lock.json" }}--{{ checksum ".circleci/config.yml" }}
+          paths:
+            - client/node_modules
       - run: cd client && npx apollo client:check || echo 'validation failed'
 
       - run: |
@@ -21,8 +30,16 @@ jobs:
 
     steps:
       - checkout
+      - restore_cache:
+          name: Attempt to restore node_modules cache (keyed on package-lock.json and circle config)
+          keys:
+            - server-node-modules-cache--{{ checksum "server/package-lock.json" }}--{{ checksum ".circleci/config.yml" }}
       - run: cd server && npm i
-
+      - save_cache:
+          name: Save node_modules cache (keyed on package-lock.json and circle config)
+          key: server-node-modules-cache--{{ checksum "server/package-lock.json" }}--{{ checksum ".circleci/config.yml" }}
+          paths:
+            - server/node_modules
       - run:
           name: Output schema locally
           command: cd server && node scripts/publish.js

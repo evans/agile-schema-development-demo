@@ -60,7 +60,7 @@ export default function ActionButton({ isBooked, id, isInCart }) {
       }}
     >
       {(mutate, { loading, error }) => {
-        if (loading) return <p>Loading...</p>;
+        if (loading) return <Button disabled={true} />;
         if (error) return <p>An error occurred</p>;
 
         return (
