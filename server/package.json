@@ -4,8 +4,8 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon src/index.js --ignore schema.json",
-    "start:ci": "node src/index.js --ignore schema.json"
+    "start": "nodemon src/index.js --ignore schema.json --ignore data",
+    "start:ci": "node src/index.js --ignore schema.json --ignore data"
   },
   "author": "",
   "license": "ISC",
