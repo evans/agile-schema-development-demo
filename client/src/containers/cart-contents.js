@@ -6,11 +6,19 @@ import Button from "../components/button";
 import BookSuccess from "../components/book-success";
 import { CartItem } from ".";
 import { GET_MY_TRIPS } from "../pages/bookedTrips";
+import { LAUNCH_TILE_DATA } from "../pages/launches";
 
 export const BOOK_TRIPS = gql`
   mutation BookTrips($launchIds: [ID]!) {
-    bookTrips(launchIds: $launchIds)
+    bookTripsWithResponse(launchIds: $launchIds) {
+      success
+      launches {
+        ...LaunchTile
+      }
+    }
   }
+
+  ${LAUNCH_TILE_DATA}
 `;
 
 export default function CartContents({ cartItems }) {
@@ -18,20 +26,38 @@ export default function CartContents({ cartItems }) {
     <Mutation
       mutation={BOOK_TRIPS}
       variables={{ launchIds: cartItems }}
-      refetchQueries={cartItems.map(launchId => ({
-        query: GET_MY_TRIPS,
-        variables: { launchId }
-      }))}
-      update={cache => {
+      update={(
+        cache,
+        {
+          data: {
+            bookTripsWithResponse: { launches }
+          }
+        }
+      ) => {
         cache.writeData({ data: { cartItems: [] } });
+
+        const trips = cache.readQuery({ query: GET_MY_TRIPS });
+        cache.writeQuery({
+          query: GET_MY_TRIPS,
+          data: {
+            me: {
+              ...trips.me,
+              trips: [...trips.me.trips, ...launches]
+            }
+          }
+        });
       }}
     >
       {(bookTrips, { data }) => {
         if (!cartItems || (!cartItems.length && !data)) {
           return <p>No items in your cart</p>;
-        } else if (data && data.bookTrips) {
+        } else if (data && data.bookTripsWithResponse) {
           return <BookSuccess />;
-        } else if (data && !data.bookTrips) {
+        } else if (
+          data &&
+          !data.bookTripsWithResponse &&
+          !data.bookTripsWithResponse.success
+        ) {
           return <p>Failed to book</p>;
         }
 
