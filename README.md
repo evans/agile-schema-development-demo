@@ -10,6 +10,8 @@ For more about the talks, please see:
 * [Talk at Apollo Day Seattle](https://www.youtube.com/watch?v=28si95VO4Ws&list=PLpi1lPB6opQznIY72BAmWtGm50D-WkYxv&index=3)
 * [Slides](https://www.slideshare.net/EvansHauser/agile-schema-development)
 
+To see the final state of the frontend shown during the demo, see [this commit](https://github.com/evans/agile-schema-development-demo/tree/final-demo-state).
+
 # Inspiration: Space Explorer
 
 This demo is inspired by the fullstack app built in the [Apollo
